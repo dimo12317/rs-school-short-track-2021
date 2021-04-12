@@ -21,8 +21,53 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const a = [];
+  for (let i = 0; i < matrix.length; i++) {
+    a[i] = [];
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    for (let y = 0; y < matrix[i].length; y++) {
+      a[i][y] = 0;
+    }
+  }
+  for (let i = 0; i < a.length; i++) {
+    for (let y = 0; y < a[i].length; y++) {
+      if (y !== a.length - 1) {
+        if (matrix[i][y + 1] === true) {
+          ++a[i][y];
+        }
+      }
+      if (i !== a.length - 1) {
+        if (matrix[i + 1][y] === true) {
+          ++a[i][y];
+        }
+      }
+      if (i !== 0) {
+        if (matrix[i - 1][y] === true) {
+          ++a[i][y];
+        }
+      }
+      if (y !== 0) {
+        if (matrix[i][y - 1] === true) {
+          ++a[i][y];
+        }
+      }
+      if (i !== a.length - 1 && y !== a.length - 1) {
+        if (matrix[i + 1][y + 1] === true) ++a[i][y];
+      }
+      if (i !== 0 && y !== a.length - 1) {
+        if (matrix[i - 1][y + 1] === true) ++a[i][y];
+      }
+      if (i !== a.length - 1 && y !== 0) {
+        if (matrix[i + 1][y - 1] === true) ++a[i][y];
+      }
+      if (i !== 0 && y !== 0) {
+        if (matrix[i - 1][y - 1] === true) ++a[i][y];
+      }
+    }
+  }
+  return a;
 }
 
 module.exports = minesweeper;
